@@ -146,92 +146,41 @@ const Bluetooth = () => {
   };
 
   return (
-    <div
-      id="app"
-      style={{
-        flex: 1,
-        height: '80%',
-        display: 'flex',
-        flexDirection: 'column',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        justifyItems: 'center',
-        backgroundColor: '#000000',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          height: '50px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '10px',
-        }}
-      >
-        <input
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          style={{ width: '200px', height: '50px' }}
-          placeholder="please input macAddress"
-        />
-        <button style={{ width: '200px', height: '50px' }} onClick={startBleScan}>
-          startBleScan
-        </button>
-      </div>
+    <div className="App">
+      <div className="container">
+        <div className="input-group">
+          <input
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Keyword"
+          />
+          <button onClick={startBleScan}>startBleScan</button>
+        </div>
 
-      <button style={{ width: '200px', height: '50px', marginTop: '10px' }} onClick={stopBleScan}>
-        stopBleScan
-      </button>
+        <button onClick={stopBleScan}>stopBleScan</button>
+        <button onClick={toastMsg}>toastMsg</button>
+        <button onClick={startQrCode}>startQrCode</button>
+        <button onClick={jump2MainActivity}>jump2MainActivity</button>
 
-      <button style={{ width: '200px', height: '50px', marginTop: '10px' }} onClick={toastMsg}>
-        toastMsg
-      </button>
+        <div className="input-group">
+          <input
+            value={macAddress}
+            onChange={(e) => setMacAddress(e.target.value)}
+            placeholder="please input macAddress"
+          />
+          <button onClick={connBleByMacAddress}>connBleByMacAddress</button>
+        </div>
 
-      <button style={{ width: '200px', height: '50px', marginTop: '10px' }} onClick={startQrCode}>
-        startQrCode
-      </button>
-
-      <button
-        style={{ width: '200px', height: '50px', marginTop: '10px' }}
-        onClick={jump2MainActivity}
-      >
-        jump2MainActivity
-      </button>
-
-      <div
-        style={{
-          width: '100%',
-          height: '50px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '10px',
-        }}
-      >
-        <input
-          value={macAddress}
-          onChange={(e) => setMacAddress(e.target.value)}
-          style={{ width: '200px', height: '50px' }}
-          placeholder="please input macAddress"
-        />
-        <button style={{ width: '200px', height: '50px' }} onClick={connBleByMacAddress}>
-          connBleByMacAddress
-        </button>
-      </div>
-
-      <div style={{ marginTop: '20px', color: '#fff' }}>
-        <h3>Scanned Devices:</h3>
-        <ul>
-          {scannedDevices.map((device, index) => (
-            <li key={index} onClick={() => handleDeviceClick(device)}>
-              {device.name} - {device.macAddress} (RSSI: {device.rssi})
-            </li>
-          ))}
-        </ul>
+        <div className="scanned-devices">
+          <h3>Scanned Devices:</h3>
+          <ul>
+            {scannedDevices.map((device, index) => (
+              <li key={index} onClick={() => handleDeviceClick(device)}>
+                {device.name} - {device.macAddress} (RSSI: {device.rssi})
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
